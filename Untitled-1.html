@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bolsa de Trabajo Conecta+</title>
+  <style>
+    :root {
+      --bg: #071b1a;
+      --bg-soft: #0d2523;
+      --panel: rgba(18, 38, 35, 0.92);
+      --panel-strong: rgba(19, 38, 35, 0.96);
+      --input: rgba(27, 48, 45, 0.95);
+      --input-border: rgba(133, 165, 157, 0.35);
+      --text: #edf4f1;
+      --muted: #b9c9c4;
+      --muted-2: #7f9691;
+      --accent: #7dd3c0;
+      --accent-strong: #9be7d4;
+      --accent-dark: #5ec0a5;
+      --tag-bg: rgba(125, 211, 192, 0.12);
+      --tag-text: #a9f0dd;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 28px 18px 40px;
+      background:
+        radial-gradient(circle at top left, rgba(59, 114, 105, 0.18), transparent 28%),
+        linear-gradient(180deg, #071b1a 0%, #071b1a 100%);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .header-wrap {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.04em;
+      color: #f4f5f2;
+    }
+
+    .title-main {
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      line-height: 0.96;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #dfeae7;
+      opacity: 0.9;
+    }
+
+    .subtitle strong {
+      font-weight: 700;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      color: #a8b9b4;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .tagline .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(125, 211, 192, 0.8);
+      box-shadow: 0 0 0 2px rgba(125, 211, 192, 0.17);
+    }
+
+    .search-panel {
+      background: rgba(13, 31, 29, 0.94);
+      border: 1px solid rgba(108, 134, 128, 0.35);
+      border-radius: 12px;
+      padding: 20px 18px 18px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: #f2f7f5;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--input-border);
+      background: rgba(30, 52, 49, 0.75);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 15px 14px;
+      font-size: 1.05rem;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 40px;
+      background-image: linear-gradient(45deg, transparent 50%, #dfeae7 50%), linear-gradient(135deg, #dfeae7 50%, transparent 50%);
+      background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+      background-size: 7px 7px, 7px 7px;
+      background-repeat: no-repeat;
+    }
+
+    .checkbox-group {
+      background: rgba(24, 46, 43, 0.8);
+      border: 1px solid rgba(108, 134, 128, 0.35);
+      border-radius: 8px;
+      padding: 12px 12px 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px 8px 2px;
+      cursor: pointer;
+      color: #f0f4f2;
+      font-size: 1.02rem;
+    }
+
+    .option input {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(213, 223, 219, 0.8);
+      background: transparent;
+      position: relative;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .option input:checked {
+      background: #5daef0;
+      border-color: #5daef0;
+      box-shadow: inset 0 0 0 2px rgba(9, 10, 12, 0.3);
+    }
+
+    .option input:checked::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: linear-gradient(180deg, var(--accent-strong) 0%, var(--accent) 100%);
+      color: #0a1f1c;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 16px 20px;
+      margin-top: 8px;
+      box-shadow: 0 8px 18px rgba(125, 211, 192, 0.18);
+      cursor: pointer;
+    }
+
+    .section-title {
+      margin: 26px 0 9px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #f7f9f8;
+    }
+
+    .results-message {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .results-message strong {
+      color: #f3f8f6;
+    }
+
+    .jobs {
+      display: grid;
+      gap: 18px;
+    }
+
+    .job-card {
+      background: rgba(14, 35, 32, 0.9);
+      border: 1px solid rgba(110, 129, 123, 0.35);
+      border-radius: 12px;
+      padding: 18px 18px 14px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .job-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .job-name {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      letter-spacing: -0.04em;
+      color: #eef4f2;
+      font-weight: 800;
+    }
+
+    .job-location {
+      margin: 4px 0 0;
+      color: #d1dfe7;
+      font-size: 0.96rem;
+      opacity: 0.9;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(125, 211, 192, 0.14);
+      color: #9de6d3;
+      border: 1px solid rgba(125, 211, 192, 0.21);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .tag::before {
+      content: "✓";
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .job-description {
+      margin: 8px 0 14px;
+      font-size: 0.97rem;
+      line-height: 1.55;
+      color: #dfeae7;
+      opacity: 0.95;
+    }
+
+    .job-meta {
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+      color: #dfeae7;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .job-meta strong {
+      color: #f5fbf9;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: rgba(125, 211, 192, 0.11);
+      color: #9fead7;
+      border: 1px solid rgba(125, 211, 192, 0.2);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.76rem;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(194, 212, 207, 0.72);
+      font-style: italic;
+    }
+
+    .theme-toggle {
+      margin-top: 14px;
+      border: 1px solid rgba(125, 211, 192, 0.45);
+      border-radius: 999px;
+      background: rgba(125, 211, 192, 0.1);
+      color: var(--accent-strong);
+      padding: 8px 14px;
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    body.light-theme {
+      background: radial-gradient(circle at top left, rgba(125, 211, 192, 0.22), transparent 30%), #f1f6f4;
+      color: #18302d;
+    }
+
+    body.light-theme h1,
+    body.light-theme .section-title,
+    body.light-theme label {
+      color: #18302d;
+    }
+
+    body.light-theme .subtitle,
+    body.light-theme .tagline,
+    body.light-theme .job-location,
+    body.light-theme .results-message,
+    body.light-theme .footer-note {
+      color: #4d6862;
+    }
+
+    body.light-theme .search-panel,
+    body.light-theme .job-card {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(74, 111, 102, 0.24);
+      box-shadow: 0 10px 30px rgba(40, 74, 65, 0.1);
+    }
+
+    body.light-theme .input,
+    body.light-theme .select {
+      background: #ffffff;
+      color: #18302d;
+      border-color: rgba(74, 111, 102, 0.35);
+    }
+
+    body.light-theme .select {
+      background-image: linear-gradient(45deg, transparent 50%, #4d6862 50%), linear-gradient(135deg, #4d6862 50%, transparent 50%);
+    }
+
+    body.light-theme .select option {
+      background: #ffffff;
+      color: #18302d;
+    }
+
+    body.light-theme .checkbox-group {
+      background: rgba(229, 241, 237, 0.75);
+      border-color: rgba(74, 111, 102, 0.24);
+    }
+
+    body.light-theme .option,
+    body.light-theme .job-description,
+    body.light-theme .job-meta {
+      color: #36534d;
+    }
+
+    body.light-theme .job-name,
+    body.light-theme .job-meta strong,
+    body.light-theme .results-message strong {
+      color: #18302d;
+    }
+
+    body.light-theme .theme-toggle {
+      background: #18302d;
+      color: #e9f7f2;
+      border-color: #18302d;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .page {
+        max-width: 100%;
+      }
+
+      .search-panel {
+        padding: 16px 14px 14px;
+      }
+
+      .job-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .title-main {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header-wrap">
+      <h1 class="title-main">Bolsa de Trabajo Conecta+</h1>
+      <p class="subtitle"><strong>Empresas que si contratan personas mayores</strong></p>
+      <p class="subtitle" style="margin-top: 8px; font-size: 0.96rem; opacity: 0.78;">Llena tus datos y te mostraremos empresas que buscan personas con tu experiencia.</p>
+      <div class="tagline"><span class="dot"></span><span>Prototipo — Fundación JEMV</span></div>
+      <button class="theme-toggle" type="button" aria-pressed="false">Tema claro</button>
+    </header>
+
+    <main>
+      <section class="search-panel" aria-label="Formulario de búsqueda laboral">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" class="input" type="text" placeholder="Ej. Maria Guadalupe Hernandez Fernandez" aria-label="Nombre completo" />
+        </div>
+
+        <div class="field">
+          <label for="edad">Edad</label>
+          <input id="edad" class="input" type="text" placeholder="Ej. 60" aria-label="Edad" />
+        </div>
+
+        <div class="field">
+          <label for="estudios">Estudios y experiencia</label>
+          <input id="estudios" class="input" type="text" placeholder="Ej. Contadora jubilada con 20 años de experiencia" aria-label="Estudios y experiencia" />
+        </div>
+
+        <div class="field">
+          <label for="area">Área en la que te gustaria trabajar</label>
+          <div class="select-wrap">
+            <select id="area" class="select" aria-label="Área de trabajo">
+              <option value="Administración y Finanzas">Administración y Finanzas</option>
+              <option value="Ventas y Atención al Cliente">Ventas y Atención al Cliente</option>
+              <option value="Tecnología y Soporte Digital">Tecnología y Soporte Digital</option>
+              <option value="Recursos Humanos y Coordinación">Recursos Humanos y Coordinación</option>
+              <option value="Marketing y Comunicación">Marketing y Comunicación</option>
+              <option value="Logística y Operaciones">Logística y Operaciones</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="ubicacion">Ubicación</label>
+          <div class="select-wrap">
+            <select id="ubicacion" class="select" aria-label="Ubicación">
+              <option value="todas">Cualquier ubicación</option>
+              <option value="jalisco">Jalisco</option>
+              <option value="colima">Colima</option>
+              <option value="durango">Durango</option>
+              <option value="guanajuato">Guanajuato</option>
+              <option value="remote">Remoto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>¿Cómo te gustaría trabajar?</label>
+          <div class="checkbox-group">
+            <label class="option"><input type="checkbox" /><span>Medio tiempo</span></label>
+            <label class="option"><input type="checkbox" /><span>Tiempo completo</span></label>
+            <label class="option"><input type="checkbox" /><span>Consultoría o por proyecto</span></label>
+            <label class="option"><input type="checkbox" /><span>Desde casa</span></label>
+          </div>
+        </div>
+
+        <button class="submit-btn" type="button">Buscar empresas</button>
+      </section>
+
+      <h2 class="section-title">Empresas para ti</h2>
+      <p class="results-message">Hola Maria, encontramos <strong>2 empresa(s)</strong> en “<strong>Administración y Finanzas</strong>” que buscan personas como tú.</p>
+
+      <section class="jobs" aria-label="Resultados de empresas">
+        <article class="job-card">
+          <div class="job-head">
+            <div>
+              <h3 class="job-name">Contadores Asociados GDL</h3>
+              <p class="job-location">Guadalajara, Jalisco</p>
+            </div>
+          </div>
+          <p class="job-description">Desarrollo contable que busca personas con experiencia en administración para apoyar en temporada de cierres y declaraciones.</p>
+          <div class="pill-group">
+            <span class="pill">Medio tiempo</span>
+            <span class="pill">Consultoría / por proyecto</span>
+          </div>
+        </article>
+
+        <article class="job-card">
+          <div class="job-head">
+            <div>
+              <h3 class="job-name">Administración Integral del Bajo</h3>
+              <p class="job-location">Querétaro, Querétaro</p>
+            </div>
+          </div>
+          <p class="job-description">Empresa de servicios administrativos para condominios y oficinas, con vacantes fijas y por medio tiempo.</p>
+          <div class="pill-group">
+            <span class="pill">Tiempo completo</span>
+            <span class="pill">Medio tiempo</span>
+          </div>
+        </article>
+      </section>
+
+      <div class="footer-note">Directorio de empleo para fines de la propuesta. No representa vacantes reales.</div>
+    </main>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('nombre');
+    const ageInput = document.getElementById('edad');
+    const studiesInput = document.getElementById('estudios');
+    const areaSelect = document.getElementById('area');
+    const locationSelect = document.getElementById('ubicacion');
+    const resultsMessage = document.querySelector('.results-message');
+    const jobsContainer = document.querySelector('.jobs');
+    const submitBtn = document.querySelector('.submit-btn');
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    function setTheme(isLight) {
+      document.body.classList.toggle('light-theme', isLight);
+      themeToggle.textContent = isLight ? 'Tema oscuro' : 'Tema claro';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      setTheme(!document.body.classList.contains('light-theme'));
+    });
+
+    setTheme(localStorage.getItem('theme') === 'light');
+
+    const empresas = [
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "INAPAM – Servicio de Vinculación Productiva",
+        "area": "Bolsa de empleo formal e informal para personas 60+: administrativo, ventas, oficios, edecanes, empaque, según perfil registrado",
+        "horas": "Variable según la vacante y convenio; el instituto promueve horarios flexibles adaptados a la persona",
+        "modalidad": "Presencial (canalización a empresas convenidas); trámite gratuito en módulos INAPAM",
+        "experiencia": "No excluyente; se valora el oficio, habilidad o profesión de cada solicitante",
+        "aplicar": "Acudir al módulo INAPAM más cercano con credencial INAPAM, identificación oficial y comprobante de domicilio; llenar solicitud de inclusión social y entrevista con el/la Promotor(a) de Vinculación Productiva",
+        "fuente": "gob.mx/inapam – Vinculación Productiva para Personas Adultas Mayores; El Informador (feb. y ago. 2026)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Walmart de México (Walmart, Bodega Aurrerá, Sam's Club, Walmart Express)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos parciales/flexibles definidos por cada tienda",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM (no es relación laboral directa con la empresa, es actividad voluntaria con retribución por propinas)",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Registro a través del módulo INAPAM (Sistema de Personas Voluntarias Empacadoras de Mercancía) o directamente en la tienda de interés",
+        "fuente": "El Financiero; Terra México (2024); SEDECO CDMX"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Soriana",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal Soriana",
+        "fuente": "Proceso.com.mx (2021); Terra México (2024)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Chedraui / City Market / City Fresko (Grupo Comercial Chedraui, La Comer)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM de cobertura nacional",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal",
+        "fuente": "Heraldo Binario (2022); Proceso.com.mx (2021)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Cinépolis (Exhibidora Mexicana Cinépolis, S.A. de C.V.)",
+        "area": "Taquilla, dulcería, limpieza/operación de sala, supervisión operativa",
+        "horas": "Medio tiempo y tiempo completo, turnos rolados",
+        "modalidad": "Presencial en complejo de cine",
+        "experiencia": "No excluyente para puestos de piso; se valora en puestos de supervisión",
+        "aplicar": "Portal de empleos Cinepolis (cinepolis.hiringroom.com) o bolsas de trabajo (Indeed, Computrabajo, LinkedIn) filtrando por ciudad",
+        "fuente": "Infobae (dic. 2023); Cinépolis Hiring Room; Indeed"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Empresas de seguridad privada (ej. Quimpli S.A. de C.V. y similares)",
+        "area": "Guardia de seguridad / vigilancia en plazas, tiendas y fraccionamientos",
+        "horas": "Turnos de 8-12 horas, rolados, incluye nocturnos",
+        "modalidad": "Presencial",
+        "experiencia": "Con o sin experiencia (contratación inmediata en varias vacantes revisadas)",
+        "aplicar": "Bolsas de trabajo locales (Indeed, OCC, Computrabajo) buscando 'guardia de seguridad sin experiencia'",
+        "fuente": "Indeed.com.mx (vacantes 'para personas mayores' en Guanajuato)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Portales de empleo con filtro para adultos mayores (OCC, Computrabajo, Indeed, Jobsora)",
+        "area": "Variado: atención al cliente, ventas, oficios, cuidado de personas mayores, administrativo",
+        "horas": "Depende de cada vacante publicada",
+        "modalidad": "Presencial y remoto, según la oferta",
+        "experiencia": "Depende de cada vacante; existen numerosas ofertas que no la exigen",
+        "aplicar": "Buscar en occ.com.mx, computrabajo.com.mx e mx.indeed.com con los términos 'adultos mayores' o 'tercera edad' + nombre del estado/ciudad",
+        "fuente": "OCC.com.mx; Computrabajo.com.mx (109 vacantes ago. 2026); Indeed.com.mx"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Servicio Nacional de Empleo / empleo.gob.mx (STPS)",
+        "area": "Bolsa de vacantes de todos los sectores por estado, con posibilidad de filtrar por perfil de mayor edad en ferias de empleo inclusivo",
+        "horas": "Variable según vacante",
+        "modalidad": "Presencial y remoto",
+        "experiencia": "Variable según vacante",
+        "aplicar": "empleo.gob.mx/vacantes/[estado] o acudir a la oficina del Servicio Nacional de Empleo estatal",
+        "fuente": "STPS – gob.mx/stps (fomento de inclusión laboral de adultos mayores)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Cuidado de personas mayores (agencias de cuidadoras/cuidadores particulares)",
+        "area": "Acompañamiento y cuidado de otras personas adultas mayores (para quienes buscan reinsertarse con esa experiencia de vida)",
+        "horas": "Por turno (8-12 h) o por convivencia (24 h con descansos)",
+        "modalidad": "Presencial, a domicilio",
+        "experiencia": "Se valora experiencia previa como cuidador(a) o familiar; no siempre excluyente",
+        "aplicar": "Plataformas como Jobsora, Computrabajo e Indeed buscando 'cuidador(a) de adultos mayores' + ciudad",
+        "fuente": "Jobsora.com (Guadalajara, +2,400 vacantes activas)"
+      },
+      {
+        "estado": "Jalisco (GDL / Zapopan)",
+        "empresa": "Ferias y edecanaje en exposiciones/convenciones (ej. Salpro, organizadores de expos)",
+        "area": "Edecán/edecana, informes, recepción y orientación en ferias y exposiciones",
+        "horas": "Por evento, jornadas de pocos días",
+        "modalidad": "Presencial, temporal",
+        "experiencia": "Se valora la responsabilidad y formalidad; no siempre se exige experiencia",
+        "aplicar": "A través de convenios INAPAM con organizadoras de expos; consultar módulo INAPAM local",
+        "fuente": "gob.mx/inapam – 'Empresas contratan edecanes adultos mayores'"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "INAPAM – Servicio de Vinculación Productiva",
+        "area": "Bolsa de empleo formal e informal para personas 60+: administrativo, ventas, oficios, edecanes, empaque, según perfil registrado",
+        "horas": "Variable según la vacante y convenio; el instituto promueve horarios flexibles adaptados a la persona",
+        "modalidad": "Presencial (canalización a empresas convenidas); trámite gratuito en módulos INAPAM",
+        "experiencia": "No excluyente; se valora el oficio, habilidad o profesión de cada solicitante",
+        "aplicar": "Acudir al módulo INAPAM más cercano con credencial INAPAM, identificación oficial y comprobante de domicilio; llenar solicitud de inclusión social y entrevista con el/la Promotor(a) de Vinculación Productiva",
+        "fuente": "gob.mx/inapam – Vinculación Productiva para Personas Adultas Mayores; El Informador (feb. y ago. 2026)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Walmart de México (Walmart, Bodega Aurrerá, Sam's Club, Walmart Express)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos parciales/flexibles definidos por cada tienda",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM (no es relación laboral directa con la empresa, es actividad voluntaria con retribución por propinas)",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Registro a través del módulo INAPAM (Sistema de Personas Voluntarias Empacadoras de Mercancía) o directamente en la tienda de interés",
+        "fuente": "El Financiero; Terra México (2024); SEDECO CDMX"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Soriana",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal Soriana",
+        "fuente": "Proceso.com.mx (2021); Terra México (2024)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Chedraui / City Market / City Fresko (Grupo Comercial Chedraui, La Comer)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM de cobertura nacional",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal",
+        "fuente": "Heraldo Binario (2022); Proceso.com.mx (2021)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Cinépolis (Exhibidora Mexicana Cinépolis, S.A. de C.V.)",
+        "area": "Taquilla, dulcería, limpieza/operación de sala, supervisión operativa",
+        "horas": "Medio tiempo y tiempo completo, turnos rolados",
+        "modalidad": "Presencial en complejo de cine",
+        "experiencia": "No excluyente para puestos de piso; se valora en puestos de supervisión",
+        "aplicar": "Portal de empleos Cinepolis (cinepolis.hiringroom.com) o bolsas de trabajo (Indeed, Computrabajo, LinkedIn) filtrando por ciudad",
+        "fuente": "Infobae (dic. 2023); Cinépolis Hiring Room; Indeed"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Empresas de seguridad privada (ej. Quimpli S.A. de C.V. y similares)",
+        "area": "Guardia de seguridad / vigilancia en plazas, tiendas y fraccionamientos",
+        "horas": "Turnos de 8-12 horas, rolados, incluye nocturnos",
+        "modalidad": "Presencial",
+        "experiencia": "Con o sin experiencia (contratación inmediata en varias vacantes revisadas)",
+        "aplicar": "Bolsas de trabajo locales (Indeed, OCC, Computrabajo) buscando 'guardia de seguridad sin experiencia'",
+        "fuente": "Indeed.com.mx (vacantes 'para personas mayores' en Guanajuato)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Portales de empleo con filtro para adultos mayores (OCC, Computrabajo, Indeed, Jobsora)",
+        "area": "Variado: atención al cliente, ventas, oficios, cuidado de personas mayores, administrativo",
+        "horas": "Depende de cada vacante publicada",
+        "modalidad": "Presencial y remoto, según la oferta",
+        "experiencia": "Depende de cada vacante; existen numerosas ofertas que no la exigen",
+        "aplicar": "Buscar en occ.com.mx, computrabajo.com.mx e mx.indeed.com con los términos 'adultos mayores' o 'tercera edad' + nombre del estado/ciudad",
+        "fuente": "OCC.com.mx; Computrabajo.com.mx (109 vacantes ago. 2026); Indeed.com.mx"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Servicio Nacional de Empleo / empleo.gob.mx (STPS)",
+        "area": "Bolsa de vacantes de todos los sectores por estado, con posibilidad de filtrar por perfil de mayor edad en ferias de empleo inclusivo",
+        "horas": "Variable según vacante",
+        "modalidad": "Presencial y remoto",
+        "experiencia": "Variable según vacante",
+        "aplicar": "empleo.gob.mx/vacantes/[estado] o acudir a la oficina del Servicio Nacional de Empleo estatal",
+        "fuente": "STPS – gob.mx/stps (fomento de inclusión laboral de adultos mayores)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Cuidado de personas mayores (agencias de cuidadoras/cuidadores particulares)",
+        "area": "Acompañamiento y cuidado de otras personas adultas mayores (para quienes buscan reinsertarse con esa experiencia de vida)",
+        "horas": "Por turno (8-12 h) o por convivencia (24 h con descansos)",
+        "modalidad": "Presencial, a domicilio",
+        "experiencia": "Se valora experiencia previa como cuidador(a) o familiar; no siempre excluyente",
+        "aplicar": "Plataformas como Jobsora, Computrabajo e Indeed buscando 'cuidador(a) de adultos mayores' + ciudad",
+        "fuente": "Jobsora.com (Guadalajara, +2,400 vacantes activas)"
+      },
+      {
+        "estado": "Colima",
+        "empresa": "Ferias y edecanaje en exposiciones/convenciones (ej. Salpro, organizadores de expos)",
+        "area": "Edecán/edecana, informes, recepción y orientación en ferias y exposiciones",
+        "horas": "Por evento, jornadas de pocos días",
+        "modalidad": "Presencial, temporal",
+        "experiencia": "Se valora la responsabilidad y formalidad; no siempre se exige experiencia",
+        "aplicar": "A través de convenios INAPAM con organizadoras de expos; consultar módulo INAPAM local",
+        "fuente": "gob.mx/inapam – 'Empresas contratan edecanes adultos mayores'"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "INAPAM – Servicio de Vinculación Productiva",
+        "area": "Bolsa de empleo formal e informal para personas 60+: administrativo, ventas, oficios, edecanes, empaque, según perfil registrado",
+        "horas": "Variable según la vacante y convenio; el instituto promueve horarios flexibles adaptados a la persona",
+        "modalidad": "Presencial (canalización a empresas convenidas); trámite gratuito en módulos INAPAM",
+        "experiencia": "No excluyente; se valora el oficio, habilidad o profesión de cada solicitante",
+        "aplicar": "Acudir al módulo INAPAM más cercano con credencial INAPAM, identificación oficial y comprobante de domicilio; llenar solicitud de inclusión social y entrevista con el/la Promotor(a) de Vinculación Productiva",
+        "fuente": "gob.mx/inapam – Vinculación Productiva para Personas Adultas Mayores; El Informador (feb. y ago. 2026)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Walmart de México (Walmart, Bodega Aurrerá, Sam's Club, Walmart Express)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos parciales/flexibles definidos por cada tienda",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM (no es relación laboral directa con la empresa, es actividad voluntaria con retribución por propinas)",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Registro a través del módulo INAPAM (Sistema de Personas Voluntarias Empacadoras de Mercancía) o directamente en la tienda de interés",
+        "fuente": "El Financiero; Terra México (2024); SEDECO CDMX"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Soriana",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal Soriana",
+        "fuente": "Proceso.com.mx (2021); Terra México (2024)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Chedraui / City Market / City Fresko (Grupo Comercial Chedraui, La Comer)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM de cobertura nacional",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal",
+        "fuente": "Heraldo Binario (2022); Proceso.com.mx (2021)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Cinépolis (Exhibidora Mexicana Cinépolis, S.A. de C.V.)",
+        "area": "Taquilla, dulcería, limpieza/operación de sala, supervisión operativa",
+        "horas": "Medio tiempo y tiempo completo, turnos rolados",
+        "modalidad": "Presencial en complejo de cine",
+        "experiencia": "No excluyente para puestos de piso; se valora en puestos de supervisión",
+        "aplicar": "Portal de empleos Cinepolis (cinepolis.hiringroom.com) o bolsas de trabajo (Indeed, Computrabajo, LinkedIn) filtrando por ciudad",
+        "fuente": "Infobae (dic. 2023); Cinépolis Hiring Room; Indeed"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Empresas de seguridad privada (ej. Quimpli S.A. de C.V. y similares)",
+        "area": "Guardia de seguridad / vigilancia en plazas, tiendas y fraccionamientos",
+        "horas": "Turnos de 8-12 horas, rolados, incluye nocturnos",
+        "modalidad": "Presencial",
+        "experiencia": "Con o sin experiencia (contratación inmediata en varias vacantes revisadas)",
+        "aplicar": "Bolsas de trabajo locales (Indeed, OCC, Computrabajo) buscando 'guardia de seguridad sin experiencia'",
+        "fuente": "Indeed.com.mx (vacantes 'para personas mayores' en Guanajuato)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Portales de empleo con filtro para adultos mayores (OCC, Computrabajo, Indeed, Jobsora)",
+        "area": "Variado: atención al cliente, ventas, oficios, cuidado de personas mayores, administrativo",
+        "horas": "Depende de cada vacante publicada",
+        "modalidad": "Presencial y remoto, según la oferta",
+        "experiencia": "Depende de cada vacante; existen numerosas ofertas que no la exigen",
+        "aplicar": "Buscar en occ.com.mx, computrabajo.com.mx e mx.indeed.com con los términos 'adultos mayores' o 'tercera edad' + nombre del estado/ciudad",
+        "fuente": "OCC.com.mx; Computrabajo.com.mx (109 vacantes ago. 2026); Indeed.com.mx"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Servicio Nacional de Empleo / empleo.gob.mx (STPS)",
+        "area": "Bolsa de vacantes de todos los sectores por estado, con posibilidad de filtrar por perfil de mayor edad en ferias de empleo inclusivo",
+        "horas": "Variable según vacante",
+        "modalidad": "Presencial y remoto",
+        "experiencia": "Variable según vacante",
+        "aplicar": "empleo.gob.mx/vacantes/[estado] o acudir a la oficina del Servicio Nacional de Empleo estatal",
+        "fuente": "STPS – gob.mx/stps (fomento de inclusión laboral de adultos mayores)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Cuidado de personas mayores (agencias de cuidadoras/cuidadores particulares)",
+        "area": "Acompañamiento y cuidado de otras personas adultas mayores (para quienes buscan reinsertarse con esa experiencia de vida)",
+        "horas": "Por turno (8-12 h) o por convivencia (24 h con descansos)",
+        "modalidad": "Presencial, a domicilio",
+        "experiencia": "Se valora experiencia previa como cuidador(a) o familiar; no siempre excluyente",
+        "aplicar": "Plataformas como Jobsora, Computrabajo e Indeed buscando 'cuidador(a) de adultos mayores' + ciudad",
+        "fuente": "Jobsora.com (Guadalajara, +2,400 vacantes activas)"
+      },
+      {
+        "estado": "Durango",
+        "empresa": "Ferias y edecanaje en exposiciones/convenciones (ej. Salpro, organizadores de expos)",
+        "area": "Edecán/edecana, informes, recepción y orientación en ferias y exposiciones",
+        "horas": "Por evento, jornadas de pocos días",
+        "modalidad": "Presencial, temporal",
+        "experiencia": "Se valora la responsabilidad y formalidad; no siempre se exige experiencia",
+        "aplicar": "A través de convenios INAPAM con organizadoras de expos; consultar módulo INAPAM local",
+        "fuente": "gob.mx/inapam – 'Empresas contratan edecanes adultos mayores'"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "INAPAM – Servicio de Vinculación Productiva",
+        "area": "Bolsa de empleo formal e informal para personas 60+: administrativo, ventas, oficios, edecanes, empaque, según perfil registrado",
+        "horas": "Variable según la vacante y convenio; el instituto promueve horarios flexibles adaptados a la persona",
+        "modalidad": "Presencial (canalización a empresas convenidas); trámite gratuito en módulos INAPAM",
+        "experiencia": "No excluyente; se valora el oficio, habilidad o profesión de cada solicitante",
+        "aplicar": "Acudir al módulo INAPAM más cercano con credencial INAPAM, identificación oficial y comprobante de domicilio; llenar solicitud de inclusión social y entrevista con el/la Promotor(a) de Vinculación Productiva",
+        "fuente": "gob.mx/inapam – Vinculación Productiva para Personas Adultas Mayores; El Informador (feb. y ago. 2026)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Walmart de México (Walmart, Bodega Aurrerá, Sam's Club, Walmart Express)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos parciales/flexibles definidos por cada tienda",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM (no es relación laboral directa con la empresa, es actividad voluntaria con retribución por propinas)",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Registro a través del módulo INAPAM (Sistema de Personas Voluntarias Empacadoras de Mercancía) o directamente en la tienda de interés",
+        "fuente": "El Financiero; Terra México (2024); SEDECO CDMX"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Soriana",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal Soriana",
+        "fuente": "Proceso.com.mx (2021); Terra México (2024)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Chedraui / City Market / City Fresko (Grupo Comercial Chedraui, La Comer)",
+        "area": "Empacador(a) voluntario(a) en caja",
+        "horas": "Turnos flexibles por sucursal",
+        "modalidad": "Presencial en tienda, bajo convenio INAPAM de cobertura nacional",
+        "experiencia": "No se requiere experiencia previa",
+        "aplicar": "Módulo INAPAM o directamente en sucursal",
+        "fuente": "Heraldo Binario (2022); Proceso.com.mx (2021)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Cinépolis (Exhibidora Mexicana Cinépolis, S.A. de C.V.)",
+        "area": "Taquilla, dulcería, limpieza/operación de sala, supervisión operativa",
+        "horas": "Medio tiempo y tiempo completo, turnos rolados",
+        "modalidad": "Presencial en complejo de cine",
+        "experiencia": "No excluyente para puestos de piso; se valora en puestos de supervisión",
+        "aplicar": "Portal de empleos Cinepolis (cinepolis.hiringroom.com) o bolsas de trabajo (Indeed, Computrabajo, LinkedIn) filtrando por ciudad",
+        "fuente": "Infobae (dic. 2023); Cinépolis Hiring Room; Indeed"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Empresas de seguridad privada (ej. Quimpli S.A. de C.V. y similares)",
+        "area": "Guardia de seguridad / vigilancia en plazas, tiendas y fraccionamientos",
+        "horas": "Turnos de 8-12 horas, rolados, incluye nocturnos",
+        "modalidad": "Presencial",
+        "experiencia": "Con o sin experiencia (contratación inmediata en varias vacantes revisadas)",
+        "aplicar": "Bolsas de trabajo locales (Indeed, OCC, Computrabajo) buscando 'guardia de seguridad sin experiencia'",
+        "fuente": "Indeed.com.mx (vacantes 'para personas mayores' en Guanajuato)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Portales de empleo con filtro para adultos mayores (OCC, Computrabajo, Indeed, Jobsora)",
+        "area": "Variado: atención al cliente, ventas, oficios, cuidado de personas mayores, administrativo",
+        "horas": "Depende de cada vacante publicada",
+        "modalidad": "Presencial y remoto, según la oferta",
+        "experiencia": "Depende de cada vacante; existen numerosas ofertas que no la exigen",
+        "aplicar": "Buscar en occ.com.mx, computrabajo.com.mx e mx.indeed.com con los términos 'adultos mayores' o 'tercera edad' + nombre del estado/ciudad",
+        "fuente": "OCC.com.mx; Computrabajo.com.mx (109 vacantes ago. 2026); Indeed.com.mx"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Servicio Nacional de Empleo / empleo.gob.mx (STPS)",
+        "area": "Bolsa de vacantes de todos los sectores por estado, con posibilidad de filtrar por perfil de mayor edad en ferias de empleo inclusivo",
+        "horas": "Variable según vacante",
+        "modalidad": "Presencial y remoto",
+        "experiencia": "Variable según vacante",
+        "aplicar": "empleo.gob.mx/vacantes/[estado] o acudir a la oficina del Servicio Nacional de Empleo estatal",
+        "fuente": "STPS – gob.mx/stps (fomento de inclusión laboral de adultos mayores)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Cuidado de personas mayores (agencias de cuidadoras/cuidadores particulares)",
+        "area": "Acompañamiento y cuidado de otras personas adultas mayores (para quienes buscan reinsertarse con esa experiencia de vida)",
+        "horas": "Por turno (8-12 h) o por convivencia (24 h con descansos)",
+        "modalidad": "Presencial, a domicilio",
+        "experiencia": "Se valora experiencia previa como cuidador(a) o familiar; no siempre excluyente",
+        "aplicar": "Plataformas como Jobsora, Computrabajo e Indeed buscando 'cuidador(a) de adultos mayores' + ciudad",
+        "fuente": "Jobsora.com (Guadalajara, +2,400 vacantes activas)"
+      },
+      {
+        "estado": "Guanajuato",
+        "empresa": "Ferias y edecanaje en exposiciones/convenciones (ej. Salpro, organizadores de expos)",
+        "area": "Edecán/edecana, informes, recepción y orientación en ferias y exposiciones",
+        "horas": "Por evento, jornadas de pocos días",
+        "modalidad": "Presencial, temporal",
+        "experiencia": "Se valora la responsabilidad y formalidad; no siempre se exige experiencia",
+        "aplicar": "A través de convenios INAPAM con organizadoras de expos; consultar módulo INAPAM local",
+        "fuente": "gob.mx/inapam – 'Empresas contratan edecanes adultos mayores'"
+      }
+    ];
+
+    function normalize(text) {
+      return String(text || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    const areaKeywords = {
+      'Administración y Finanzas': ['administrativo', 'finanzas', 'contabilidad', 'recepcion', 'informes', 'coordinacion', 'secretaria'],
+      'Ventas y Atención al Cliente': ['ventas', 'atencion al cliente', 'taquilla', 'dulceria', 'recepcion', 'edecan', 'orientacion', 'servicio al cliente'],
+      'Tecnología y Soporte Digital': ['soporte', 'digital', 'tecnologia', 'computo', 'sistemas', 'online', 'tecnico'],
+      'Recursos Humanos y Coordinación': ['supervision', 'coordinacion', 'recursos humanos', 'informes', 'orientacion', 'recepcion'],
+      'Marketing y Comunicación': ['marketing', 'comunicacion', 'ferias', 'exposiciones', 'edecan', 'informes', 'recepcion', 'orientacion'],
+      'Logística y Operaciones': ['empaque', 'logistica', 'operacion', 'seguridad', 'guardia', 'almacen', 'taquilla', 'limpieza', 'supervision']
+    };
+
+    function matchesSelectedArea(job, selectedArea) {
+      if (!selectedArea || selectedArea === 'todas') return true;
+
+      return getGiro(job) === selectedArea;
+    }
+
+    function getGiro(job) {
+      const text = normalize(`${job.empresa} ${job.area}`);
+
+      if (text.includes('inapam') || text.includes('empleo') || text.includes('occ') || text.includes('computrabajo') || text.includes('jobsora')) return 'Administración y Finanzas';
+      if (text.includes('seguridad') || text.includes('guardia') || text.includes('vigilancia') || text.includes('empaque')) return 'Logística y Operaciones';
+      if (text.includes('cine') || text.includes('taquilla') || text.includes('dulceria') || text.includes('walmart') || text.includes('soriana') || text.includes('chedraui')) return 'Ventas y Atención al Cliente';
+      if (text.includes('cuidado') || text.includes('acompanamiento')) return 'Recursos Humanos y Coordinación';
+      if (text.includes('edecan') || text.includes('feria') || text.includes('expos')) return 'Marketing y Comunicación';
+      if (text.includes('administrativ') || text.includes('contab') || text.includes('finanz')) return 'Administración y Finanzas';
+
+      return 'Administración y Finanzas';
+    }
+
+    function getSelectedModes() {
+      return Array.from(document.querySelectorAll('.option input:checked')).map((input) => input.parentElement.textContent.trim());
+    }
+
+    function renderJobs(list) {
+      jobsContainer.innerHTML = list.map((job) => `
+        <article class="job-card">
+          <div class="job-head">
+            <div>
+              <h3 class="job-name">${job.empresa}</h3>
+              <p class="job-location">${job.estado}</p>
+            </div>
+          </div>
+          <p class="job-description">${job.area}</p>
+          <div class="job-meta">
+            <div><strong>Giro:</strong> ${getGiro(job)}</div>
+            <div><strong>Horario:</strong> ${job.horas}</div>
+            <div><strong>Modalidad:</strong> ${job.modalidad}</div>
+            <div><strong>Experiencia:</strong> ${job.experiencia}</div>
+            <div><strong>Cómo aplicar:</strong> ${job.aplicar}</div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filterJobsByProfile(modes, selectedLocation, selectedArea) {
+      let jobs = [...empresas];
+
+      if (selectedArea && selectedArea !== 'todas') {
+        jobs = jobs.filter((job) => matchesSelectedArea(job, selectedArea));
+      }
+
+      if (selectedLocation && selectedLocation !== 'todas') {
+        jobs = jobs.filter((job) => {
+          const locationText = normalize(job.estado);
+          if (selectedLocation === 'remote') return normalize(job.modalidad).includes('remoto') || normalize(job.modalidad).includes('a domicilio');
+          if (selectedLocation === 'jalisco') return locationText.includes('jalisco');
+          if (selectedLocation === 'colima') return locationText.includes('colima');
+          if (selectedLocation === 'durango') return locationText.includes('durango');
+          if (selectedLocation === 'guanajuato') return locationText.includes('guanajuato');
+          return true;
+        });
+      }
+
+      if (modes.length) {
+        jobs = jobs.filter((job) => {
+          const text = normalize(`${job.area} ${job.modalidad} ${job.horas}`);
+          return modes.some((selectedMode) => {
+            const selected = normalize(selectedMode);
+            return text.includes(selected) || selected === 'desde casa' && normalize(job.modalidad).includes('domicilio');
+          });
+        });
+      }
+
+      return jobs;
+    }
+
+    function searchCompanies() {
+      const name = nameInput.value.trim() || 'Amiga';
+      const age = Number(ageInput.value) || 0;
+      const studies = studiesInput.value.trim() || 'experiencia general';
+      const selectedArea = areaSelect.value || 'Administración y Finanzas';
+      const selectedLocation = locationSelect.value || 'todas';
+      const modes = getSelectedModes();
+      const filteredJobs = filterJobsByProfile(modes, selectedLocation, selectedArea);
+
+      let mensajeExtra = 'y un perfil con mucha disposición para aprender';
+      if (age >= 55) {
+        mensajeExtra = 'y un perfil muy valioso por tu experiencia';
+      }
+      if (modes.includes('Desde casa')) {
+        mensajeExtra += ' en modalidad remota';
+      }
+
+      const areaLabel = areaSelect.options[areaSelect.selectedIndex].text;
+      const locationLabel = selectedLocation === 'todas' ? 'cualquier ubicación' : locationSelect.options[locationSelect.selectedIndex].text;
+      resultsMessage.innerHTML = `Hola ${name}, encontramos <strong>${filteredJobs.length} empresa(s)</strong> en <strong>${areaLabel}</strong> y ubicación <strong>${locationLabel}</strong> que buscan personas como tú, con ${studies} ${mensajeExtra}.`;
+
+      renderJobs(filteredJobs);
+    }
+
+    submitBtn.addEventListener('click', searchCompanies);
+    resultsMessage.textContent = 'Completa tus datos y pulsa “Buscar empresas” para ver las opciones de trabajo.';
+    jobsContainer.innerHTML = '';
+  </script>
+</body>
+</html>
+
